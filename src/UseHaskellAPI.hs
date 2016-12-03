@@ -37,6 +37,16 @@ deriving instance ToBSON   String
 data ResponseData = ResponseData { response :: String
                                  } deriving (Generic, ToJSON, FromJSON,FromBSON, Show)
 
+data MetaData = MetaData { url               :: String
+                         , no_of_commits     :: String
+			 , last_commit_hash  :: String
+                         } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
+
+
+data RepoDetails = RepoDetails { repo_url     :: String
+                               , complexity   :: String
+			       , noofcommits  :: String
+			       } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 -- | Next we will define the API for the REST service. This is defined as a 'type' using a special syntax from the
 -- Servant Library. A REST endpoint is defined by chaining together a series of elements in the format `A :> B :> C`. A
 -- set of rest endpoints are chained in the format `X :<|> Y :<|> Z`. We define a set of endpoints to demonstrate
@@ -50,5 +60,6 @@ data ResponseData = ResponseData { response :: String
 type API = "load_environment_variables" :> QueryParam "name" String :> Get '[JSON] ResponseData
       :<|> "getREADME"                  :> Get '[JSON] ResponseData
       :<|> "storeMessage"               :> ReqBody '[JSON] Message  :> Post '[JSON] Bool
+      :<|> "storeMetaData"              :> ReqBody '[JSON] MetaData :> Post '[JSON] Bool
       :<|> "searchMessage"              :> QueryParam "name" String :> Get '[JSON] [Message]
       :<|> "performRESTCall"            :> QueryParam "filter" String  :> Get '[JSON] ResponseData
