@@ -43,6 +43,10 @@ data MetaData = MetaData { url               :: String
                          } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
 
+data LastCommitDetails = LastCommitDetails { commit_url        :: String
+					   , last_commit_hash_value  :: String
+					   }deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
+
 data RepoDetails = RepoDetails { repo_url     :: String
                                , complexity   :: String
 			       , noofcommits  :: String
@@ -61,5 +65,6 @@ type API = "load_environment_variables" :> QueryParam "name" String :> Get '[JSO
       :<|> "getREADME"                  :> Get '[JSON] ResponseData
       :<|> "storeMessage"               :> ReqBody '[JSON] Message  :> Post '[JSON] Bool
       :<|> "storeMetaData"              :> ReqBody '[JSON] MetaData :> Post '[JSON] Bool
+      :<|> "getLastCommitDetails"          :> QueryParam "url" String :> Get '[JSON] [LastCommitDetails]
       :<|> "searchMessage"              :> QueryParam "name" String :> Get '[JSON] [Message]
       :<|> "performRESTCall"            :> QueryParam "filter" String  :> Get '[JSON] ResponseData
