@@ -67,6 +67,7 @@ data RepoMetrics = RepoMetrics { rm_url               :: String
 -- :> chain. If the method is Get, then the set of QueryParams determine the attributes of the Get call. If the method
 -- is Post, then there will be a single ReqBody element that defines the type being transmitted. The return type for
 -- each method is noted in the last element in the :> chain.
+-- :<|> "getMetrics"                 :> QueryParam "url" String :> Get '[JSON] [RepoMetrics]
 
 type API = "load_environment_variables" :> QueryParam "name" String :> Get '[JSON] ResponseData
       :<|> "getREADME"                  :> Get '[JSON] ResponseData
@@ -74,6 +75,5 @@ type API = "load_environment_variables" :> QueryParam "name" String :> Get '[JSO
       :<|> "storeMetaData"              :> ReqBody '[JSON] MetaData :> Post '[JSON] Bool
       :<|> "getLastCommitDetails"       :> QueryParam "url" String :> Get '[JSON] [LastCommitDetails]
       :<|> "storeComplexity"            :> ReqBody '[JSON] RepoComplexity :> Post '[JSON] Bool
-      :<|> "getMetrics"                 :> QueryParam "url" String :> Get '[JSON] [RepoMetrics]
       :<|> "searchMessage"              :> QueryParam "name" String :> Get '[JSON] [Message]
       :<|> "performRESTCall"            :> QueryParam "filter" String  :> Get '[JSON] ResponseData
