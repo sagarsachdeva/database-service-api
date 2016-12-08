@@ -39,17 +39,23 @@ data ResponseData = ResponseData { response :: String
 
 data MetaData = MetaData {  url               :: String
                           , no_of_commits     :: String
-			                    , last_commit_hash  :: String
+                          , last_commit_hash  :: String
                          } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
 
 data LastCommitDetails = LastCommitDetails { commit_url        :: String
-					                                 , last_commit_hash_value  :: String
-					                                 }deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
+                                           , last_commit_hash_value  :: String
+                                           }deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
 data RepoComplexity = RepoComplexity { repo_url     :: String
-                                    , complexity    :: String
-			                               } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
+                                     , complexity    :: String
+                                     } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
+
+data RepoMetrics = RepoMetrics { rm_url               :: String
+                               , rm_no_of_commits     :: String
+                               , rm_last_commit_hash  :: String
+                               , rm_complexity    :: String
+                               } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
 
 -- | Next we will define the API for the REST service. This is defined as a 'type' using a special syntax from the
@@ -66,6 +72,8 @@ type API = "load_environment_variables" :> QueryParam "name" String :> Get '[JSO
       :<|> "getREADME"                  :> Get '[JSON] ResponseData
       :<|> "storeMessage"               :> ReqBody '[JSON] Message  :> Post '[JSON] Bool
       :<|> "storeMetaData"              :> ReqBody '[JSON] MetaData :> Post '[JSON] Bool
-      :<|> "getLastCommitDetails"          :> QueryParam "url" String :> Get '[JSON] [LastCommitDetails]
+      :<|> "getLastCommitDetails"       :> QueryParam "url" String :> Get '[JSON] [LastCommitDetails]
+      :<|> "storeComplexity"            :> ReqBody '[JSON] RepoComplexity :> Post '[JSON] Bool
+      :<|> "getMetrics"                 :> QueryParam "url" String :> Get '[JSON] [RepoMetrics]
       :<|> "searchMessage"              :> QueryParam "name" String :> Get '[JSON] [Message]
       :<|> "performRESTCall"            :> QueryParam "filter" String  :> Get '[JSON] ResponseData
