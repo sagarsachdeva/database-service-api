@@ -37,15 +37,16 @@ deriving instance ToBSON   String
 data ResponseData = ResponseData { response :: String
                                  } deriving (Generic, ToJSON, FromJSON,FromBSON, Show)
 
-data MetaData = MetaData { url               :: String
-                         , no_of_commits     :: String
-			 , last_commit_hash  :: String
+data MetaData = MetaData { _id                :: String
+                          , url               :: String
+                          , no_of_commits     :: String
+			                    , last_commit_hash  :: String
                          } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
 
 data LastCommitDetails = LastCommitDetails { commit_url        :: String
-					   , last_commit_hash_value  :: String
-					   }deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
+					                                 , last_commit_hash_value  :: String
+					                                 }deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
 data RepoDetails = RepoDetails { repo_url     :: String
                                , complexity   :: String
