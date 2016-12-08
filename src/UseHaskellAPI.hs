@@ -47,10 +47,11 @@ data LastCommitDetails = LastCommitDetails { commit_url        :: String
 					                                 , last_commit_hash_value  :: String
 					                                 }deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
-data RepoDetails = RepoDetails { repo_url     :: String
-                               , complexity   :: String
-			       , noofcommits  :: String
-			       } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
+data RepoComplexity = RepoComplexity { repo_url     :: String
+                                    , complexity    :: String
+			                               } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
+
+
 -- | Next we will define the API for the REST service. This is defined as a 'type' using a special syntax from the
 -- Servant Library. A REST endpoint is defined by chaining together a series of elements in the format `A :> B :> C`. A
 -- set of rest endpoints are chained in the format `X :<|> Y :<|> Z`. We define a set of endpoints to demonstrate
