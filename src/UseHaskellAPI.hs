@@ -6,6 +6,7 @@
 {-# LANGUAGE StandaloneDeriving   #-}
 {-# LANGUAGE TypeOperators        #-}
 {-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE DuplicateRecordFields #-}
 
 module UseHaskellAPI where
 
@@ -51,10 +52,10 @@ data RepoComplexity = RepoComplexity { repo_url     :: String
                                      , complexity    :: String
                                      } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
-data RepoMetrics = RepoMetrics { rm_url               :: String
-                               , rm_no_of_commits     :: String
-                               , rm_last_commit_hash  :: String
-                               , rm_complexity    :: String
+data RepoMetrics = RepoMetrics { url               :: String
+                               , no_of_commits     :: String
+                               , last_commit_hash  :: String
+                               , complexity    :: String
                                } deriving (Show, Generic, FromJSON, ToJSON, ToBSON, FromBSON)
 
 
