@@ -8,7 +8,14 @@
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 
-module UseHaskellAPI (API, MetaData(url, no_of_commits, last_commit_hash), RepoMetrics(url, no_of_commits, last_commit_hash), Message, ResponseData, LastCommitDetails, RepoComplexity) where
+module UseHaskellAPI (API, MetaData(url
+                                   , no_of_commits
+                                   , last_commit_hash)
+                          , RepoMetrics(url, no_of_commits, last_commit_hash)
+                          , Message(..)
+                          , ResponseData(..)
+                          , LastCommitDetails(..)
+                          , RepoComplexity(..)) where
 
 
 import           Data.Aeson
