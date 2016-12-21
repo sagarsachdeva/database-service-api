@@ -81,6 +81,7 @@ type API = "load_environment_variables" :> QueryParam "name" String :> Get '[JSO
       :<|> "storeMessage"               :> ReqBody '[JSON] Message  :> Post '[JSON] Bool
       :<|> "storeMetaData"              :> ReqBody '[JSON] MetaData :> Post '[JSON] Bool
       :<|> "getLastCommitDetails"       :> QueryParam "url" String :> Get '[JSON] [LastCommitDetails]
+      :<|> "getRepoMetrics"             :> QueryParam "url" String :> Get '[JSON] [RepoMetrics]
       :<|> "storeComplexity"            :> ReqBody '[JSON] RepoComplexity :> Post '[JSON] Bool
       :<|> "searchMessage"              :> QueryParam "name" String :> Get '[JSON] [Message]
       :<|> "performRESTCall"            :> QueryParam "filter" String  :> Get '[JSON] ResponseData

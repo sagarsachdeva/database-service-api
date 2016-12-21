@@ -24,13 +24,14 @@ getREADME :: ClientM ResponseData
 storeMessage :: Message -> ClientM Bool
 storeMetaData :: MetaData -> ClientM Bool
 getLastCommitDetails :: Maybe String -> ClientM [LastCommitDetails]
+getRepoMetrics::Maybe String -> ClientM [RepoMetrics]
 storeComplexity :: RepoComplexity -> ClientM Bool
 searchMessage :: Maybe String -> ClientM [Message]
 performRestCall :: Maybe String -> ClientM ResponseData
 
--- getMetrics :: Maybe String -> ClientM [RepoMetrics]
--- add 
+
+
 -- | The following provides the implementations of these types
 -- Note that the order of the functions must match the endpoints in the type API from UseHaskell.hs
 
-(loadEnvVars :<|> getREADME :<|> storeMessage :<|> storeMetaData :<|> getLastCommitDetails :<|> storeComplexity :<|> searchMessage :<|> performRestCall) = client restAPI
+(loadEnvVars :<|> getREADME :<|> storeMessage :<|> storeMetaData :<|> getLastCommitDetails :<|> getRepoMetrics :<|> storeComplexity :<|> searchMessage :<|> performRestCall) = client restAPI
